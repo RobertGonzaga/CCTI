@@ -68,6 +68,7 @@ h1 {
   align-items: center;
   position: relative;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .consoles > div:hover {
@@ -236,6 +237,7 @@ h1 {
   align-items: center;
   position: relative;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .otherLogin > div:hover {
