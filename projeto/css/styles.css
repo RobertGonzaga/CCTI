@@ -15,56 +15,70 @@ body {
   margin-top: 30px;
   margin-bottom: 30px;
   background-color: #19191c;
-  height: 230vh;
-  width: 40vw;
+  height: 1376.5px;
+  width: 560px;
   border: 1px solid #302f33;
   border-radius: 25px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 48px;
   flex-direction: column;
+}
+
+.containerMaster > a {
+  text-align: center;
+  color: #00b5f7;
+  font-family: "Inter", sans-serif;
 }
 
 h1 {
   text-align: center;
   font-size: 25px;
-  color: white;
+  color: #ffffff;
   font-family: "Inter Tight", sans-serif;
 }
 
 .consoles {
   border: 1px solid #302f33;
-  border-radius: 20px;
+  border-radius: 18px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   padding: 16px;
-  gap: 15px;
+  gap: 16px;
 }
 
 .consoles > p {
   text-align: center;
   font-size: 16px;
+  font-weight: 600;
   font-family: "Inter", sans-serif;
   color: #a8a8aa;
+  line-height: 165%;
+}
+
+.consoles > div {
+  display: flex;
+  background-color: #201f24;
+  width: 430px;
+  height: 48px;
+  border-radius: 999px;
+  padding: 4px;
+  align-items: center;
+  position: relative;
+  transition: 0.2s;
+}
+
+.consoles > div:hover {
+  background-color: #3d3d40;
 }
 
 .consoles > div > p {
   text-align: center;
   font-size: 16px;
   font-family: "Inter", sans-serif;
-  color: white;
+  color: #ffffff;
   flex: 1;
-}
-
-.consoles > div {
-  display: flex;
-  background-color: #201f24;
-  height: 50px;
-  border-radius: 999px;
-  padding: 4px;
-  align-items: center;
-  position: relative;
 }
 
 .playstationIcon {
@@ -79,8 +93,8 @@ h1 {
 }
 
 .playstationIcon > img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }
 
 .xboxIcon {
@@ -91,33 +105,258 @@ h1 {
   height: 40px;
   background-color: #027d00;
   border-radius: 50%;
+  position: absolute;
 }
 
 .xboxIcon > img {
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
+}
+
+.nintendoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e80101;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.nintendoIcon > img {
+  width: 40px;
+  height: 40px;
 }
 
 .emailLogin {
   border: 1px solid #302f33;
-  border-radius: 20px;
-  height: 15%;
+  border-radius: 18px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.emailInput {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emailInput > label {
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: #a8a8aa;
+}
+
+#emailInput {
+  width: 429px;
+  height: 48px;
+  padding: 12px 20px 12px;
+  background-color: #242529;
+  border: 1px solid #302f33;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+#emailInput:hover {
+  border-color: #a8a8aa;
+}
+
+.emailLogin > button {
+  width: 430px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background-color: #26bbff;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+.emailLogin > button:hover {
+  background-color: #61cdff;
+}
+
+.emailLogin > p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  color: #a8a8aa;
 }
 
 .createAccount {
   border: 1px solid #302f33;
-  border-radius: 20px;
-  height: 5%;
+  border-radius: 18px;
+  width: 464px;
+  height: 58px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  color: #a8a8aa;
+  font-size: 14px;
+}
+
+.createAccount > p > span > a {
+  color: #01b2f1;
 }
 
 .otherLogin {
   border: 1px solid #302f33;
-  border-radius: 20px;
-  height: 36%;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.containerMaster > p {
+.otherLogin > p {
   text-align: center;
-  color: #208bba;
+  font-size: 16px;
+  font-weight: 600;
   font-family: "Inter", sans-serif;
+  color: #a8a8aa;
+  line-height: 165%;
+}
+
+.otherLogin > div {
+  display: flex;
+  background-color: #201f24;
+  width: 430px;
+  height: 48px;
+  border-radius: 999px;
+  padding: 4px;
+  align-items: center;
+  position: relative;
+  transition: 0.2s;
+}
+
+.otherLogin > div:hover {
+  background-color: #3d3d40;
+}
+
+.otherLogin > div > p {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+  flex: 1;
+}
+
+.googleIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.googleIcon > img {
+  width: 26px;
+  height: 26px;
+}
+
+.steamIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.steamIcon > img {
+  width: 30px;
+  height: 30px;
+}
+
+.disneyIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.disneyIcon > img {
+  width: 30px;
+  height: 30px;
+}
+
+.appleIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.appleIcon > img {
+  width: 24px;
+  height: 24px;
+}
+
+.facebookIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #0866ff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.facebookIcon > img {
+  width: 32px;
+  height: 32px;
+}
+
+.legoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffd400;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.legoIcon > img {
+  width: 26px;
+  height: 26px;
+}
+
+.autodeskIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.autodeskIcon > img {
+  width: 26px;
+  height: 26px;
 }
