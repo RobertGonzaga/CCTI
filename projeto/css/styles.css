@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #101014;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerMaster {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #19191c;
+  height: 230vh;
+  width: 40vw;
+  border: 1px solid #302f33;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-around;
+  padding: 48px;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-family: "Inter Tight", sans-serif;
+}
+
+.consoles {
+  border: 1px solid #302f33;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 16px;
+  gap: 15px;
+}
+
+.consoles > p {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: #a8a8aa;
+}
+
+.consoles > div > p {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: white;
+  flex: 1;
+}
+
+.consoles > div {
+  display: flex;
+  background-color: #201f24;
+  height: 50px;
+  border-radius: 999px;
+  padding: 4px;
+  align-items: center;
+  position: relative;
+}
+
+.playstationIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #003791;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.playstationIcon > img {
+  width: 24px;
+  height: 24px;
+}
+
+.xboxIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #027d00;
+  border-radius: 50%;
+}
+
+.xboxIcon > img {
+  width: 20px;
+  height: 20px;
+}
+
+.emailLogin {
+  border: 1px solid #302f33;
+  border-radius: 20px;
+  height: 15%;
+}
+
+.createAccount {
+  border: 1px solid #302f33;
+  border-radius: 20px;
+  height: 5%;
+}
+
+.otherLogin {
+  border: 1px solid #302f33;
+  border-radius: 20px;
+  height: 36%;
+}
+
+.containerMaster > p {
+  text-align: center;
+  color: #208bba;
+  font-family: "Inter", sans-serif;
+}

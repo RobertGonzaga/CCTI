@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 300px;
+  padding: 8px;
+  gap: 10px;
+  background-color: #adb5bd;
+}
+
+.imagem {
+  height: 100%;
+  width: auto;
+}
+
+.descricao{
+  text-align: justify;
+}
+
+.profissao{
+  text-align: center;
+}
+
