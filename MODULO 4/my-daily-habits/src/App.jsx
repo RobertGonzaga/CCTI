@@ -1,6 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer";
 import Cabecalho from "./components/Cabecalho";
+import SecaoHabitos from "./components/SecaoHabitos";
 
 const BemVindo = ({ nomeUsuario, totalHabitos }) => {
   // Lógica antes do return
