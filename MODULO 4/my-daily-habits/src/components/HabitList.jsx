@@ -1,6 +1,12 @@
+// import { useEffect } from "react";
 import HabitCard from "./HabitCard";
 
 function HabitList({ habits }) {
+  // useEffect(() => {
+  //   document.title = `My Daily Habits — ${habits.length} hábito(s)`;
+  //   console.log("useEffect rodou");
+  // }, []);
+
   if (!habits) return null;
 
   if (habits.lenght === 0) {

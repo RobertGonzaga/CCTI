@@ -7,8 +7,10 @@ function HabitCard({ titulo, meta, ativo = true, diasFeitos = 0, categoria = "Ge
     <div className="habits-card">
       <h3>{titulo}</h3>
       <p>{mensagemMeta}</p>
-      <small>Categria: {categoria}</small>
+      <small>Categria: {categoria} </small>
+      <br />
       <span>{ativo ? "Ativo" : "Pausado"} </span>
+      <br />
       {metaAtingida && "Parabéns, você manteve a sequencia essa semana!"}
     </div>
   );
