@@ -28,6 +28,26 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: #f4f4f5;
+}
+
+header,
+footer {
+  padding: 16px;
+  background-color: #111827;
+  color: #f9fafb;
+  text-align: center;
+}
+
+main,
+section {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 h1 {

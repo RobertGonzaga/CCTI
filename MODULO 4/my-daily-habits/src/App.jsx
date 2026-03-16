@@ -2,6 +2,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Cabecalho from "./components/Cabecalho";
 import SecaoHabitos from "./components/SecaoHabitos";
+import HabitList from "./components/HabitList";
 
 const BemVindo = ({ nomeUsuario, totalHabitos }) => {
   // Lógica antes do return
@@ -29,15 +30,16 @@ function App() {
   ];
 
   return (
-    <>
-      <div>
-        <Cabecalho titulo="My Daily Habits" descricao="Construindo uma rotina melhor, um hábito por vez." />
-        <BemVindo nomeUsuario="turma iteam" totalHabitos={habits.length} />
-        <h1>My Daily Habits</h1>
-        <p>Gerencie seus hábitos diários</p>
-        <Footer />
-      </div>
-    </>
+    <div>
+      <Cabecalho titulo="My Daily Habits" descricao="Construindo uma rotina melhor, um hábito por vez." />
+      <BemVindo nomeUsuario="turma iteam" totalHabitos={habits.length} />
+      <h1>My Daily Habits</h1>
+      <p>Gerencie seus hábitos diários</p>
+      <SecaoHabitos titulo="Meus Hábitos">
+        <HabitList habits={habits} />
+      </SecaoHabitos>
+      <Footer />
+    </div>
   );
 }
 
