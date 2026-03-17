@@ -1,17 +1,24 @@
-function HabitCard({ titulo, meta, ativo = true, diasFeitos = 0, categoria = "Geral" }) {
+function HabitCard({ nome, descricao = "", meta, ativo = true, diasFeitos = 0, onRemover }) {
   const metaAtingida = diasFeitos >= meta;
 
-  const mensagemMeta = metaAtingida ? "Meta da semana atingida!" : `${diasFeitos} de ${meta} dias concluídos`;
+  const mensagemMeta = metaAtingida
+    ? "🏆 Meta da semana atingida!"
+    : `${diasFeitos} de ${meta} dias concluídos`;
 
   return (
-    <div className="habits-card">
-      <h3>{titulo}</h3>
+    <div className="habit-card">
+      <h3>{nome}</h3>
+      {descricao && <p>{descricao}</p>}
       <p>{mensagemMeta}</p>
-      <small>Categria: {categoria} </small>
-      <br />
-      <span>{ativo ? "Ativo" : "Pausado"} </span>
-      <br />
-      {metaAtingida && "Parabéns, você manteve a sequencia essa semana!"}
+      <span>{ativo ? "✅ Ativo" : "⏸️ Pausado"}</span>
+      {metaAtingida && <p>⭐ Parabéns! Meta da semana atingida!</p>}
+
+      {/* onRemover: só aparece se o pai passar essa prop */}
+      {onRemover && (
+        <button type="button" onClick={onRemover}>
+          Remover
+        </button>
+      )}
     </div>
   );
 }

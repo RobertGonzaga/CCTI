@@ -1,30 +1,86 @@
-// import { useEffect } from "react";
+import { useState } from "react";
 import HabitCard from "./HabitCard";
 
-function HabitList({ habits }) {
-  // useEffect(() => {
-  //   document.title = `My Daily Habits — ${habits.length} hábito(s)`;
-  //   console.log("useEffect rodou");
-  // }, []);
+function HabitList() {
+  const [habits, setHabits] = useState([
+    { id: 1, nome: "Exercício", descricao: "Treino de força", meta: 5, ativo: true, diasFeitos: 5 },
+    { id: 2, nome: "Leitura", descricao: "Livro ou artigo", meta: 7, ativo: true, diasFeitos: 3 },
+    { id: 3, nome: "Meditação", descricao: "Respiração e foco", meta: 7, ativo: false, diasFeitos: 0 },
+    { id: 4, nome: "Hidratação", descricao: "Beber 2L de água", meta: 7, ativo: true, diasFeitos: 6 },
+  ]);
 
-  if (!habits) return null;
+  const removerHabit = (id) => {
+    setHabits(habits.filter((habit) => habit.id !== id));
+  };
 
-  if (habits.lenght === 0) {
-    return <p>Nenhum hábito cadastrado ainda, que tal comecar?</p>;
-  }
+  const [novoNome, setNovoNome] = useState("");
+  const [novaDescricao, setNovaDescricao] = useState("");
+  const [novaCategoria, setNovaCategoria] = useState("");
+
+  const adicionarHabit = (event) => {
+    event.preventDefault();
+
+    if (!novoNome.trim()) {
+      alert("Informe um nome para o hábito.");
+      return;
+    }
+
+    const novoHabit = {
+      id: Date.now(),
+      nome: novoNome,
+      descricao: novaDescricao,
+      meta: 7, // padrão
+      ativo: true, // padrão
+      diasFeitos: 0, // padrão
+      categoria: novaCategoria || "Geral",
+    };
+
+    setHabits([...habits, novoHabit]);
+
+    // Limpar os campos após adicionar
+    setNovoNome("");
+    setNovaDescricao("");
+    setNovaCategoria("");
+  };
 
   return (
-    <ul>
-      {habits.map((habit) => (
-        <HabitCard
-          key={habit.id}
-          titulo={habit.titulo}
-          meta={habit.meta}
-          ativo={habit.ativo}
-          diasFeitos={habit.diasFeitos}
-        />
-      ))}
-    </ul>
+    <section>
+      <form onSubmit={adicionarHabit} className="habit-form">
+        <div>
+          <label>
+            Nome do hábito *
+            <input type="text" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Descrição
+            <input type="text" value={novaDescricao} onChange={(e) => setNovaDescricao(e.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Categoria
+            <input type="text" value={novaCategoria} onChange={(e) => setNovaCategoria(e.target.value)} />
+          </label>
+        </div>
+        <button type="submit">Adicionar hábito</button>
+      </form>
+
+      <ul>
+        {habits.map((habit) => (
+          <HabitCard
+            key={habit.id}
+            nome={habit.nome}
+            descricao={habit.descricao}
+            meta={habit.meta}
+            ativo={habit.ativo}
+            diasFeitos={habit.diasFeitos}
+            onRemover={() => removerHabit(habit.id)}
+          />
+        ))}
+      </ul>
+    </section>
   );
 }
 
