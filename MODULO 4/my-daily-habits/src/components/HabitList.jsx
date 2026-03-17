@@ -68,6 +68,7 @@ function HabitList() {
       </form>
 
       <ul>
+        {habits.length === 0 && <p>Nenhum hábito cadastrado ainda.</p>}
         {habits.map((habit) => (
           <HabitCard
             key={habit.id}

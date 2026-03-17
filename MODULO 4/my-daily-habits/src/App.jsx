@@ -22,12 +22,7 @@ const BemVindo = ({ nomeUsuario, totalHabitos }) => {
 };
 
 function App() {
-  const habits = [
-    { id: 1, titulo: "Exercício", meta: 5, ativo: true, diasFeitos: 5 },
-    { id: 2, titulo: "Leitura", meta: 7, ativo: true, diasFeitos: 3 },
-    { id: 3, titulo: "Meditação", meta: 7, ativo: true, diasFeitos: 0 },
-    { id: 4, titulo: "Hidratação", meta: 7, ativo: true, diasFeitos: 6 },
-  ];
+  const habits = [];
 
   return (
     <div>
@@ -36,7 +31,7 @@ function App() {
       <h1>My Daily Habits</h1>
       <p>Gerencie seus hábitos diários</p>
       <SecaoHabitos titulo="Meus Hábitos">
-        <HabitList habits={habits} />
+        <HabitList />
       </SecaoHabitos>
       <Footer />
     </div>
