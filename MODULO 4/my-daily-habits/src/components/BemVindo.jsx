@@ -1,15 +1,22 @@
-function BemVindo({ nomeUsuario, totalHabits }) {
-  // Lógica antes do return
-  const nomeFormatado = nomeUsuario.toUpperCase();
-  const mensagem =
-    totalHabits > 0
-      ? `Você tem ${totalHabits} hábito(s) cadastrado(s).`
-      : "Nenhum hábito cadastrado ainda. Que tal começar?";
+import { useHabits } from "../contexts/HabitsContext";
+
+function BemVindo({ nomeUsuario }) {
+  // Acesso direto ao contexto — sem props, sem intermediários
+  const { habits } = useHabits();
+
+  // Estado derivado — calculado na hora, sempre atualizado
+  const totalHabitos = habits.length;
+  const habitosAtivos = habits.filter((h) => h.ativo).length;
+
   return (
     <div>
-      <h2>Olá, {nomeFormatado}!</h2>
-      <p>{mensagem}</p>
-      <p>Média diária: {(totalHabits * 30).toFixed(0)} atividades por mês</p>
+      <h2>Olá, {nomeUsuario.toUpperCase()}!</h2>
+      <p>
+        Você tem <strong>{totalHabitos}</strong> hábito(s) cadastrado(s).
+      </p>
+      <p>
+        <strong>{habitosAtivos}</strong> ativo(s) no momento.
+      </p>
     </div>
   );
 }
