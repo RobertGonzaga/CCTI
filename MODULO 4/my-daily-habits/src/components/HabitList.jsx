@@ -1,29 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import HabitCard from "./HabitCard";
 
-function HabitList() {
-  const [habits, setHabits] = useState(() => {
-    // Esta função executa UMA VEZ — na montagem
-    const stored = localStorage.getItem("my-daily-habits");
-
-    // Se não há nada salvo — usa o array inicial
-    if (!stored)
-      return [
-        { id: 1, nome: "Exercício", descricao: "Treino de força", meta: 5, ativo: true, diasFeitos: 5 },
-        { id: 2, nome: "Leitura", descricao: "Livro ou artigo", meta: 7, ativo: true, diasFeitos: 3 },
-        { id: 3, nome: "Meditação", descricao: "Respiração e foco", meta: 7, ativo: false, diasFeitos: 0 },
-        { id: 4, nome: "Hidratação", descricao: "Beber 2L de água", meta: 7, ativo: true, diasFeitos: 6 },
-      ];
-
-    // Se há dados salvos — tenta fazer o parse
-    try {
-      return JSON.parse(stored);
-    } catch {
-      // Se o JSON estiver corrompido — volta pro array inicial
-      return [];
-    }
-  });
-
+function HabitList({ initialHabits, habits, setHabits }) {
   const removerHabit = (id) => {
     setHabits(habits.filter((habit) => habit.id !== id));
   };
@@ -31,7 +9,14 @@ function HabitList() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     // [name] é uma chave dinâmica — usa o valor de name como nome da propriedade
-    if (name === "novoNome") setNovoNome(value);
+    if (name === "novoNome") {
+      setNovoNome(value);
+      if (value.length > 0 && value.length < 3) {
+        setErroNome("O nome deve ter pelo menos 3 caracteres.");
+      } else {
+        setErroNome("");
+      }
+    }
     if (name === "novaDescricao") setNovaDescricao(value);
     if (name === "novaCategoria") setNovaCategoria(value);
   };
@@ -39,6 +24,7 @@ function HabitList() {
   const [novoNome, setNovoNome] = useState("");
   const [novaDescricao, setNovaDescricao] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
+  const [erroNome, setErroNome] = useState("");
 
   const nomeInputRef = useRef(null);
 
@@ -47,6 +33,11 @@ function HabitList() {
 
     if (!novoNome.trim()) {
       alert("Informe um nome para o hábito.");
+      return;
+    }
+
+    if (erroNome) {
+      nomeInputRef.current?.focus();
       return;
     }
 
@@ -79,12 +70,7 @@ function HabitList() {
 
   const limparHistorico = () => {
     localStorage.removeItem("my-daily-habits");
-    setHabits([
-      { id: 1, nome: "Exercício", descricao: "Treino de força", meta: 5, ativo: true, diasFeitos: 5 },
-      { id: 2, nome: "Leitura", descricao: "Livro ou artigo", meta: 7, ativo: true, diasFeitos: 3 },
-      { id: 3, nome: "Meditação", descricao: "Respiração e foco", meta: 7, ativo: false, diasFeitos: 0 },
-      { id: 4, nome: "Hidratação", descricao: "Beber 2L de água", meta: 7, ativo: true, diasFeitos: 6 },
-    ]);
+    setHabits(initialHabits);
   };
 
   return (
@@ -95,6 +81,7 @@ function HabitList() {
             Nome do hábito *
             <input type="text" value={novoNome} name="novoNome" onChange={handleChange} ref={nomeInputRef} />
           </label>
+          {erroNome && <p style={{ color: "red", fontSize: "0.8rem" }}>{erroNome}</p>}
         </div>
         <div>
           <label>
