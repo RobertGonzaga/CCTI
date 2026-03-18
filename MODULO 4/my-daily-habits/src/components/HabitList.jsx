@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import HabitCard from "./HabitCard";
 
 function HabitList() {
@@ -28,9 +28,19 @@ function HabitList() {
     setHabits(habits.filter((habit) => habit.id !== id));
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // [name] é uma chave dinâmica — usa o valor de name como nome da propriedade
+    if (name === "novoNome") setNovoNome(value);
+    if (name === "novaDescricao") setNovaDescricao(value);
+    if (name === "novaCategoria") setNovaCategoria(value);
+  };
+
   const [novoNome, setNovoNome] = useState("");
   const [novaDescricao, setNovaDescricao] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
+
+  const nomeInputRef = useRef(null);
 
   const adicionarHabit = (event) => {
     event.preventDefault();
@@ -56,6 +66,7 @@ function HabitList() {
     setNovoNome("");
     setNovaDescricao("");
     setNovaCategoria("");
+    nomeInputRef.current?.focus();
   };
 
   // Passo 1 — montagem
@@ -66,25 +77,35 @@ function HabitList() {
     localStorage.setItem("my-daily-habits", JSON.stringify(habits));
   }, [habits]);
 
+  const limparHistorico = () => {
+    localStorage.removeItem("my-daily-habits");
+    setHabits([
+      { id: 1, nome: "Exercício", descricao: "Treino de força", meta: 5, ativo: true, diasFeitos: 5 },
+      { id: 2, nome: "Leitura", descricao: "Livro ou artigo", meta: 7, ativo: true, diasFeitos: 3 },
+      { id: 3, nome: "Meditação", descricao: "Respiração e foco", meta: 7, ativo: false, diasFeitos: 0 },
+      { id: 4, nome: "Hidratação", descricao: "Beber 2L de água", meta: 7, ativo: true, diasFeitos: 6 },
+    ]);
+  };
+
   return (
     <section>
       <form onSubmit={adicionarHabit} className="habit-form">
         <div>
           <label>
             Nome do hábito *
-            <input type="text" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
+            <input type="text" value={novoNome} name="novoNome" onChange={handleChange} ref={nomeInputRef} />
           </label>
         </div>
         <div>
           <label>
             Descrição
-            <input type="text" value={novaDescricao} onChange={(e) => setNovaDescricao(e.target.value)} />
+            <input type="text" value={novaDescricao} name="novaDescricao" onChange={handleChange} />
           </label>
         </div>
         <div>
           <label>
             Categoria
-            <input type="text" value={novaCategoria} onChange={(e) => setNovaCategoria(e.target.value)} />
+            <input type="text" value={novaCategoria} name="novaCategoria" onChange={handleChange} />
           </label>
         </div>
         <button type="submit">Adicionar hábito</button>
@@ -104,6 +125,7 @@ function HabitList() {
           />
         ))}
       </ul>
+      <button onClick={limparHistorico}>Limpar histórico</button>
     </section>
   );
 }
