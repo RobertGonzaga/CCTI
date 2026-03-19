@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import HabitCard from "./HabitCard";
 import { useHabits } from "../contexts/HabitsContext";
+import { useNavigate } from "react-router-dom";
 
 function HabitList() {
   // Hábitos e funções vêm do contexto — não do useState local
   const { habits, adicionarHabit, removerHabit, limparHistorico } = useHabits();
+  const navigate = useNavigate();
 
   // Estado de UI — continua local (só o formulário usa)
   const [form, setForm] = useState({
@@ -47,6 +49,7 @@ function HabitList() {
     setForm({ novoNome: "", novaDescricao: "", novaCategoria: "", novaMeta: "7" });
     setErroNome("");
     nomeInputRef.current?.focus();
+    navigate("/habitos");
   };
 
   if (!habits) return null;
@@ -100,7 +103,7 @@ function HabitList() {
       <ul>
         {habits.map((habit) => (
           <HabitCard
-            key={habit.id}
+            id={habit.id}
             nome={habit.nome}
             descricao={habit.descricao}
             categoria={habit.categoria}
