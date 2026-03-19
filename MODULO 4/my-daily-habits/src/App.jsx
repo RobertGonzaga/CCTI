@@ -5,6 +5,7 @@ import PaginaInicio from "./pages/PaginaInicio";
 import PaginaHabitos from "./pages/PaginaHabitos";
 import PaginaDetalhes from "./pages/PaginaDetalhes";
 import PaginaNaoEncontrada from "./pages/PaginaNaoEncontrada";
+import "./App.css";
 
 function App() {
   return (
