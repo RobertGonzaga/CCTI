@@ -16,8 +16,10 @@ export default function TaskItem({ titulo }: TaskItemProps) {
 const styles = StyleSheet.create({
   item: {
     padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    margin: 4,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
   },
   itemText: {
     fontSize: 16,
