@@ -1,26 +1,19 @@
 import React from "react";
-import { Text, View, FlatList } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-//dados da lista
-const tarefas = [
-  { id: 1, titulo: "Estudar React Native" },
-  { id: 2, titulo: "Criar primeira tela" },
-  { id: 3, titulo: "Montar lista de tarefas" },
-];
+import HomeScreen from "./src/screens/HomeScreen";
+import NewTask from "./src/screens/NewTask";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const renderItem = ({ item }) => (
-    <View style={{ padding: 10, borderBottomWidth: 1, borderBottomColor: "#ccc" }}>
-      <Text>{item.titulo}</Text>
-    </View>
-  );
-
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ fontSize: 20, color: "green" }}>HELLO WORLD!</Text>
-      <Text>Meu primeiro app mobile</Text>
-
-      <FlatList data={tarefas} renderItem={renderItem} keyExtractor={(item) => item.id} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: "TaskApp" }} />
+        <Stack.Screen name="NewTask" component={NewTask} options={{ title: "Nova Tarefa" }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
