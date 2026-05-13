@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from "react";
-import { FlatList, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { FlatList, Text, View, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+
 import TaskItem from "../components/TaskItem";
 
 const STORAGE_KEY = "@taskapp:tarefas";
@@ -29,20 +31,18 @@ export default function HomeScreen({ navigation }: any) {
         ];
 
         setTarefas(listaInicial);
+
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(listaInicial));
       }
     } catch (error) {
-      console.log("Erro ao carregar tarefas:", error);
+      console.log(error);
     }
   };
 
   const salvarTarefas = async (novaLista: Tarefa[]) => {
-    try {
-      setTarefas(novaLista);
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(novaLista));
-    } catch (error) {
-      console.log("Erro ao salvar tarefas:", error);
-    }
+    setTarefas(novaLista);
+
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(novaLista));
   };
 
   const concluirTarefa = async (id: string) => {
@@ -55,6 +55,7 @@ export default function HomeScreen({ navigation }: any) {
 
   const excluirTarefa = async (id: string) => {
     const novaLista = tarefas.filter((tarefa) => tarefa.id !== id);
+
     await salvarTarefas(novaLista);
   };
 
@@ -69,13 +70,16 @@ export default function HomeScreen({ navigation }: any) {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Minhas tarefas</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("NewTask")}>
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
+
+      <Text style={styles.subtitle}>Organize seu dia de forma simples</Text>
+
       <FlatList
         data={tarefas}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.list}
         renderItem={({ item }) => (
           <TaskItem
             titulo={item.titulo}
@@ -85,43 +89,57 @@ export default function HomeScreen({ navigation }: any) {
             onEditar={() => editarTarefa(item)}
           />
         )}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.list}
       />
-    </View>
+
+      <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate("NewTask")}>
+        <Text style={styles.fabText}>+</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#F4F7FB",
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
+
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 16,
-    textAlign: "center",
+    fontSize: 32,
+    fontWeight: "700",
+    color: "#1E293B",
   },
+
+  subtitle: {
+    fontSize: 15,
+    color: "#64748B",
+    marginTop: 6,
+    marginBottom: 24,
+  },
+
   list: {
-    marginTop: 16,
-    paddingBottom: 20,
+    paddingBottom: 120,
   },
-  button: {
+
+  fab: {
     position: "absolute",
-    right: 20,
-    bottom: 20,
-    backgroundColor: "#0e9594",
+    right: 24,
+    bottom: 30,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "#0F172A",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 25,
-    width: 50,
-    height: 50,
     zIndex: 999,
+    elevation: 8,
   },
-  buttonText: {
-    fontSize: 30,
-    color: "#ffffff",
+
+  fabText: {
+    color: "#FFF",
+    fontSize: 34,
+    marginTop: -2,
   },
 });

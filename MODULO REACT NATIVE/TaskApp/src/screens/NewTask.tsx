@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@taskapp:tarefas";
@@ -18,6 +20,7 @@ export default function NewTask({ route, navigation }: any) {
   const salvarTarefa = async () => {
     if (titulo.trim() === "") {
       Alert.alert("Atenção", "Digite o título da tarefa.");
+
       return;
     }
 
@@ -29,13 +32,11 @@ export default function NewTask({ route, navigation }: any) {
       let tarefasAtualizadas = [];
 
       if (tarefa) {
-        tarefasAtualizadas = tarefas.map((item: any) =>
-          item.id === tarefa.id ? { ...item, titulo: titulo } : item,
-        );
+        tarefasAtualizadas = tarefas.map((item: any) => (item.id === tarefa.id ? { ...item, titulo } : item));
       } else {
         const novaTarefa = {
           id: Date.now().toString(),
-          titulo: titulo,
+          titulo,
           concluida: false,
         };
 
@@ -44,27 +45,29 @@ export default function NewTask({ route, navigation }: any) {
 
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(tarefasAtualizadas));
 
-      setTitulo("");
-
       navigation.goBack();
     } catch (error) {
-      console.log("Erro ao salvar tarefa:", error);
-      Alert.alert("Erro", "Não foi possível salvar a tarefa.");
+      console.log(error);
+
+      Alert.alert("Erro", "Não foi possível salvar.");
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{tarefa ? "Editar Tarefa" : "Nova Tarefa"}</Text>
+      <Text style={styles.title}>{tarefa ? "Editar tarefa" : "Nova tarefa"}</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Digite o título da tarefa"
+        placeholder="Digite sua tarefa..."
+        placeholderTextColor="#94A3B8"
         value={titulo}
         onChangeText={setTitulo}
       />
 
-      <Button title={tarefa ? "Salvar alterações" : "Salvar tarefa"} onPress={salvarTarefa} />
+      <TouchableOpacity style={styles.button} onPress={salvarTarefa}>
+        <Text style={styles.buttonText}>{tarefa ? "Salvar alterações" : "Salvar tarefa"}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -72,21 +75,39 @@ export default function NewTask({ route, navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#F4F7FB",
+    padding: 24,
     justifyContent: "center",
   },
+
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 16,
-    textAlign: "center",
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#0F172A",
+    marginBottom: 24,
   },
+
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 12,
-    marginBottom: 16,
-    borderRadius: 8,
+    backgroundColor: "#FFF",
+    borderRadius: 16,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    fontSize: 16,
+    marginBottom: 20,
+    elevation: 2,
+    color: "#0F172A",
+  },
+
+  button: {
+    backgroundColor: "#0F172A",
+    paddingVertical: 16,
+    borderRadius: 16,
+    alignItems: "center",
+  },
+
+  buttonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
