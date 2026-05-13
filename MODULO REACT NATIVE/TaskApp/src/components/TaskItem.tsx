@@ -1,14 +1,24 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
 type TaskItemProps = {
   titulo: string;
+  concluida: boolean;
+  onConcluir: () => void;
+  onExcluir: () => void;
+  onEditar: () => void;
 };
 
-export default function TaskItem({ titulo }: TaskItemProps) {
+export default function TaskItem({ titulo, concluida, onConcluir, onExcluir, onEditar }: TaskItemProps) {
   return (
     <View style={styles.item}>
-      <Text style={styles.itemText}>{titulo}</Text>
+      <Text style={[styles.itemText, concluida && styles.concluida]}>{titulo}</Text>
+
+      <View style={styles.actions}>
+        <Button title="Editar" onPress={onEditar} />
+        <Button title={concluida ? "Desfazer" : "Concluir"} onPress={onConcluir} />
+        <Button title="Excluir" onPress={onExcluir} />
+      </View>
     </View>
   );
 }
@@ -16,13 +26,20 @@ export default function TaskItem({ titulo }: TaskItemProps) {
 const styles = StyleSheet.create({
   item: {
     padding: 12,
-    margin: 4,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
   },
   itemText: {
     fontSize: 16,
-    textAlign: "center",
+    marginBottom: 8,
+  },
+  concluida: {
+    textDecorationLine: "line-through",
+    color: "#888",
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 8,
   },
 });
