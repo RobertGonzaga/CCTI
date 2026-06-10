@@ -5,7 +5,7 @@ using namespace std;
 using namespace std::chrono;
 
 int main() {
-  const long long N = 5000000000; // 500 milhões de iterações
+  const long long N = 500000000; // 500 milhões de iterações
   volatile double soma = 0;
 
   auto inicio = high_resolution_clock::now();
