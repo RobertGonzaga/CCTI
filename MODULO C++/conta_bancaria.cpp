@@ -6,9 +6,9 @@ int main() {
   class ContaBancaria {
   private:
     string titular;
+    double saldo;
 
   public:
-    double saldo;
     ContaBancaria(string titular, double saldo) {
       this->titular = titular;
       this->saldo = saldo;
